@@ -8,7 +8,7 @@
 import Foundation
 import squirrel
 
-open class DiskCache<T: Codable>: Cache {
+open class DiskCache<T: Codable>: CacheOf {
     public typealias This = T
     public typealias That = ByteArray
     
@@ -75,10 +75,10 @@ open class DiskCache<T: Codable>: Cache {
         return nil
     }
     
-    public func getEntry(key: String) -> squirrel.Entry_<AnyObject>? {
+    public func getEntry(key: String) -> Entry<AnyObject>? {
         if let codableEntry = getCodableEntry(key: key) {
             let codableClass = CodableClass(codableEntry.value)
-            let entry = squirrel.Entry_(key: codableEntry.key, value: codableClass as AnyObject, updated: codableEntry.updated, expiration: codableEntry.expiration)
+            let entry = Entry(key: codableEntry.key, value: codableClass as AnyObject, updated: codableEntry.updated, expiration: codableEntry.expiration)
             return entry
         }
         return nil
