@@ -75,10 +75,10 @@ open class DiskCache<T: Codable>: Cache {
         return nil
     }
     
-    public func getEntry(key: String) -> Entry_<AnyObject>? {
+    public func getEntry(key: String) -> squirrel.Entry_<AnyObject>? {
         if let codableEntry = getCodableEntry(key: key) {
             let codableClass = CodableClass(codableEntry.value)
-            let entry = Entry_(key: codableEntry.key, value: codableClass as AnyObject, updated: codableEntry.updated, expiration: codableEntry.expiration)
+            let entry = squirrel.Entry_(key: codableEntry.key, value: codableClass as AnyObject, updated: codableEntry.updated, expiration: codableEntry.expiration)
             return entry
         }
         return nil
