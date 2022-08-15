@@ -13,7 +13,7 @@ open class DiskCache<T: Codable>: Cache {
     public typealias That = ByteArray
     
     public var name: String
-    var cacheUrl: URL
+    public var cacheUrl: URL
     
     public let fileManager = FileManager()
     public let dispatchQueue = DispatchQueue(label: "SQUIRREL", attributes: DispatchQueue.Attributes.concurrent)

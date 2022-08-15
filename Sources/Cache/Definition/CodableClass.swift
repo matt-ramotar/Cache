@@ -9,7 +9,7 @@ import Foundation
 
 public class CodableClass<T: Codable>: Codable {
     let value: T
-    init(_ value: T) {
+    public init(_ value: T) {
         self.value = value
     }
 }
