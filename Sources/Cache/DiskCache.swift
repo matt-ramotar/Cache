@@ -8,16 +8,16 @@
 import Foundation
 import squirrel
 
-class DiskCache<T: Codable>: Cache {
+public class DiskCache<T: Codable>: Cache {
     typealias This = T
     typealias That = ByteArray
     
-    var name: String
+    public var name: String
     var cacheUrl: URL
     
-    private let fileManager = FileManager()
-    private let dispatchQueue = DispatchQueue(label: "SQUIRREL", attributes: DispatchQueue.Attributes.concurrent)
-    private let converter = ByteArrayConverter<This>()
+    fileprivate let fileManager = FileManager()
+    fileprivate let dispatchQueue = DispatchQueue(label: "SQUIRREL", attributes: DispatchQueue.Attributes.concurrent)
+    fileprivate let converter = ByteArrayConverter<This>()
     
     init(name: String) {
         self.name = name
@@ -30,7 +30,7 @@ class DiskCache<T: Codable>: Cache {
         } catch { }
     }
     
-    func add(key: String, value: Any?, expiration_ expiration: KotlinLong?) {
+    public func add(key: String, value: Any?, expiration_ expiration: KotlinLong?) {
         let codableEntry = CodableEntry<CodableClass<This>>(key: key, value: CodableClass(value as! This))
         let byteArray = self.converter.from(value: codableEntry)
         do {
@@ -38,7 +38,7 @@ class DiskCache<T: Codable>: Cache {
         } catch {}
     }
     
-    func delete(key: String) -> Bool {
+    public func delete(key: String) -> Bool {
         let url = url(key).path
         do {
             try fileManager.removeItem(atPath: url)
@@ -48,13 +48,13 @@ class DiskCache<T: Codable>: Cache {
         }
     }
     
-    func deleteAll() {
+    public func deleteAll() {
         for key in keys() {
             delete(key: key)
         }
     }
     
-    func get(key: String, serializer: KSerializer) -> Any? {
+    public func get(key: String, serializer: KSerializer) -> Any? {
         if let entry = getEntry(key: key) {
             let codableClass = entry.value as! CodableClass<This>
             return codableClass.value
@@ -75,7 +75,7 @@ class DiskCache<T: Codable>: Cache {
         return nil
     }
     
-    func getEntry(key: String) -> Entry_<AnyObject>? {
+    public func getEntry(key: String) -> Entry_<AnyObject>? {
         if let codableEntry = getCodableEntry(key: key) {
             let codableClass = CodableClass(codableEntry.value)
             let entry = Entry_(key: codableEntry.key, value: codableClass as AnyObject, updated: codableEntry.updated, expiration: codableEntry.expiration)
@@ -84,7 +84,7 @@ class DiskCache<T: Codable>: Cache {
         return nil
     }
     
-    func keys() -> Set<String> {
+    public func keys() -> Set<String> {
         let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
         return Set(urls.compactMap { $0.absoluteString } )
     }
