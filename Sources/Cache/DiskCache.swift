@@ -19,7 +19,7 @@ open class DiskCache<T: Codable>: Cache {
     fileprivate let dispatchQueue = DispatchQueue(label: "SQUIRREL", attributes: DispatchQueue.Attributes.concurrent)
     fileprivate let converter = ByteArrayConverter<This>()
     
-    init(name: String) {
+    public init(name: String) {
         self.name = name
         
         let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!

@@ -7,10 +7,10 @@
 
 import Foundation
 
-class ByteArrayConverter<T: Codable>: CodableConverter {
-    typealias T = T
-    typealias This = CodableClass<T>
-    typealias That = ByteArray
+open class ByteArrayConverter<T: Codable>: CodableConverter {
+    public typealias T = T
+    public typealias This = CodableClass<T>
+    public typealias That = ByteArray
     
     public func to(value: ByteArray) ->  CodableEntry<CodableClass<T>>? {
         do {
@@ -29,6 +29,4 @@ class ByteArrayConverter<T: Codable>: CodableConverter {
             return nil
         }
     }
-    
-    
 }
