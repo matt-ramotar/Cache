@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Squirrel",
+        "repositoryURL": "https://github.com/matt-ramotar/SquirrelSwiftPackage",
+        "state": {
+          "branch": "master",
+          "revision": "d4dfb76e81d02cb6c75b3714ef879c2a26147ec6",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
