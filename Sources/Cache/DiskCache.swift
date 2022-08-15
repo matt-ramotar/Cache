@@ -9,15 +9,15 @@ import Foundation
 import squirrel
 
 open class DiskCache<T: Codable>: Cache {
-    typealias This = T
-    typealias That = ByteArray
+    public typealias This = T
+    public typealias That = ByteArray
     
     public var name: String
     var cacheUrl: URL
     
-    fileprivate let fileManager = FileManager()
-    fileprivate let dispatchQueue = DispatchQueue(label: "SQUIRREL", attributes: DispatchQueue.Attributes.concurrent)
-    fileprivate let converter = ByteArrayConverter<This>()
+    public let fileManager = FileManager()
+    public let dispatchQueue = DispatchQueue(label: "SQUIRREL", attributes: DispatchQueue.Attributes.concurrent)
+    public let converter = ByteArrayConverter<This>()
     
     public init(name: String) {
         self.name = name
@@ -63,7 +63,7 @@ open class DiskCache<T: Codable>: Cache {
     }
     
     
-    private func getCodableEntry(key: String) -> CodableEntry<This>? {
+    public func getCodableEntry(key: String) -> CodableEntry<This>? {
         let url = url(key).path
         if fileManager.fileExists(atPath: url) {
             do {
@@ -89,7 +89,7 @@ open class DiskCache<T: Codable>: Cache {
         return Set(urls.compactMap { $0.absoluteString } )
     }
     
-    private func url(_ key: String) -> URL {
+    public func url(_ key: String) -> URL {
         return self.cacheUrl
             .appendingPathComponent(key)
             .appendingPathExtension("SQUIRREL")
