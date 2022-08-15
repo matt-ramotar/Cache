@@ -8,7 +8,7 @@
 import Foundation
 import squirrel
 
-public class DiskCache<T: Codable>: Cache {
+open class DiskCache<T: Codable>: Cache {
     typealias This = T
     typealias That = ByteArray
     
